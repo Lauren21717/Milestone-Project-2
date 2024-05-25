@@ -1,0 +1,27 @@
+body {
+    background:  #FCEFCF;
+    font-family: 'Mali', sans-serif;
+}
+
+.quiz-container {
+    color: #41204D;
+    display: flex;
+    flex-direction: column;
+}
+
+.question-title {
+    background: #FFCDAB;
+}
+
+.answer-list {
+    cursor: pointer;
+}
+
+.custom-list-item {
+    background-color: #FFB27E;
+    border: none;
+}
+
+.cat-image {
+    width: 18%;
+}
