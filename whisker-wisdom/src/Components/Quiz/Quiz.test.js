@@ -40,17 +40,37 @@ describe('Quiz Component', () => {
 
     test('checks if selecting an incorrect option applies the wrong class', () => {
         render(<Quiz />);
-    
+
         const incorrectOptionIndex = data[0].ans === 1 ? 2 : 1; // Choose an incorrect option index
         const incorrectOptionText = data[0][`option${incorrectOptionIndex}`];
         const incorrectOption = screen.getByText(incorrectOptionText);
-    
+
         fireEvent.click(incorrectOption);
-    
+
         expect(incorrectOption).toHaveClass('bg-danger');
         const correctOptionText = data[0][`option${data[0].ans}`];
         const correctOption = screen.getByText(correctOptionText);
         expect(correctOption).toHaveClass('bg-success');
     });
-    
+
+    test('checks if nextQuestion function moves to the next question', () => {
+        render(<Quiz />);
+
+        const nextQuestionButton = screen.getByText('Next Question');
+        fireEvent.click(nextQuestionButton);
+
+        const newQuestion = data[1].question;
+        const questionElement = screen.getByText(newQuestion);
+        expect(questionElement).toBeInTheDocument();
+
+        const lock = screen.getByTestId('lock');
+        expect(lock).toBe(false);
+
+        option_array.forEach((option) => {
+            expect(option.current.classList.contains('bg-success').toBe(false));
+            expect(option.current.classList.contains('bg-danger').toBe(false));
+        });
+
+    });
 });
+

@@ -8,30 +8,46 @@ const Quiz = () => {
 
   const [questionIndex, setQuestionIndex] = useState(0);
   const [question, setQuestion] = useState(data[questionIndex]);
-  const [lock, setLock] = useState(false)
+  const [lock, setLock] = useState(false);
 
-  let option1 = useRef(null);
-  let option2 = useRef(null);
-  let option3 = useRef(null);
-  let option4 = useRef(null);
+  const option1 = useRef(null);
+  const option2 = useRef(null);
+  const option3 = useRef(null);
+  const option4 = useRef(null);
 
-  let option_arr = [option1, option2, option3, option4]
+  const option_arr = [option1, option2, option3, option4]
 
   useEffect(() => {
     setQuestion(data[questionIndex]);
   }, [questionIndex]);
 
+  // Function to validate the user's answer in the quiz
+  // Parameters:
+  // - option: Represents the selected option by the user
+  // - ans: Indicates the correct answer index
   const checkAnswer = (option, ans) => {
     if (!lock) {
       if (question.ans === ans) {
         option.target.classList.add("bg-success");
-        setLock(true);
       } else {
         option.target.classList.add("bg-danger");
-        setLock(true);
-        option_arr[question.ans-1].current.classList.add('bg-success')
+        option_arr[question.ans - 1].current.classList.add('bg-success')
       }
-    } 
+      setLock(true);
+    }
+  };
+
+  const nextQuestion = () => {
+    if (lock) {
+      if (questionIndex === data.length - 1) {
+        return;
+      }
+      setQuestionIndex(prevIndex => prevIndex + 1);
+      setLock(false);
+      option_arr.forEach(option => {
+        option.current.classList.remove('bg-success', 'bg-danger');
+      });
+    }
   };
 
   return (
@@ -55,7 +71,7 @@ const Quiz = () => {
       </ul>
 
 
-      <button className='rounded mx-auto d-block btn btn-lg px-5 fw-semibold text-white mt-1'>Next Question</button>
+      <button className='rounded mx-auto d-block btn btn-lg px-5 fw-semibold text-white mt-1' onClick={nextQuestion} >Next Question</button>
       <div className='text-center fs-5 '>{questionIndex + 1} of {data.length} question{data.length > 1 ? 's' : ''}</div>
 
     </div>
