@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Intro.css'
 import catBg2 from '../../assets/images/cat3.png';
@@ -13,7 +14,9 @@ const Intro = () => {
         </div>
       </div>
       <img className='rounded mx-auto d-block img-fluid' src={catBg2} alt='' />
-      <button className='rounded mx-auto d-block btn btn-lg px-5 fw-semibold text-white'>Let’s Start!</button>
+      < Link to="/Quiz" className="text-decoration-none">
+        <button className='rounded mx-auto d-block btn btn-lg px-5 fw-semibold text-white'>Let’s Start!</button>
+      </ Link >
     </div>
   )
 }
