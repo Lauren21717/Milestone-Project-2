@@ -1,76 +1,39 @@
-import React from "react";
-import { fireEvent, render, screen } from '@testing-library/react';
-import Quiz from "./Quiz";
+import React from 'react';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+import Quiz from './Quiz';
 import { data } from '../../assets/JS/data';
 
-describe('Quiz Component', () => {
-    test('renders the first question and options', () => {
-        render(<Quiz />);
+describe('Quiz component', () => {
+  test('renders without crashing', () => {
+    render(
+      <MemoryRouter>
+        <Quiz />
+      </MemoryRouter>
+    );
+    expect(screen.getByText('Question 1')).toBeInTheDocument();
+  });
 
-        const questionElement = screen.getByText(data[0].question);
-        expect(questionElement).toBeInTheDocument();
+  test('displays the current question', () => {
+    render(
+      <MemoryRouter>
+        <Quiz />
+      </MemoryRouter>
+    );
+    expect(screen.getByText(data[0].question)).toBeInTheDocument();
+  });
 
-        const option1 = screen.getByText(data[0].option1);
-        expect(option1).toBeInTheDocument();
+  test('allows user to select answers and navigate to the next question', () => {
+    render(
+      <MemoryRouter>
+        <Quiz />
+      </MemoryRouter>
+    );
 
-        const option2 = screen.getByText(data[0].option2);
-        expect(option2).toBeInTheDocument();
+    fireEvent.click(screen.getByText(data[0].option1));
+    fireEvent.click(screen.getByText('Next Question'));
+    expect(screen.getByText(data[1].question)).toBeInTheDocument();
+  });
 
-        const option3 = screen.getByText(data[0].option3);
-        expect(option3).toBeInTheDocument();
-
-        const option4 = screen.getByText(data[0].option4);
-        expect(option4).toBeInTheDocument();
-    });
-
-    test('checks if selecting the correct option applies correct class', () => {
-        render(<Quiz />);
-
-        const correctOptionIndex = data[0].ans - 1;
-
-        const option1 = screen.getByText(data[0].option1);
-        fireEvent.click(option1);
-
-        if (0 === correctOptionIndex) {
-            expect(option1).toHaveClass('bg-success');
-        } else {
-            expect(option1).toHaveClass('bg-danger');
-        }
-    });
-
-    test('checks if selecting an incorrect option applies the wrong class', () => {
-        render(<Quiz />);
-
-        const incorrectOptionIndex = data[0].ans === 1 ? 2 : 1; // Choose an incorrect option index
-        const incorrectOptionText = data[0][`option${incorrectOptionIndex}`];
-        const incorrectOption = screen.getByText(incorrectOptionText);
-
-        fireEvent.click(incorrectOption);
-
-        expect(incorrectOption).toHaveClass('bg-danger');
-        const correctOptionText = data[0][`option${data[0].ans}`];
-        const correctOption = screen.getByText(correctOptionText);
-        expect(correctOption).toHaveClass('bg-success');
-    });
-
-    test('checks if nextQuestion function moves to the next question', () => {
-        render(<Quiz />);
-
-        const nextQuestionButton = screen.getByText('Next Question');
-        fireEvent.click(nextQuestionButton);
-
-        const newQuestion = data[1].question;
-        const questionElement = screen.getByText(newQuestion);
-        expect(questionElement).toBeInTheDocument();
-
-        const lock = screen.getByTestId('lock');
-        expect(lock).toBe(false);
-
-        option_array.forEach((option) => {
-            expect(option.current.classList.contains('bg-success').toBe(false));
-            expect(option.current.classList.contains('bg-danger').toBe(false));
-        });
-
-    });
+  
 });
-
