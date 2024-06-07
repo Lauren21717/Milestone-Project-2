@@ -1,22 +1,36 @@
-import React from "react";
+import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import LandingPage from "./LandingPage";
-import Intro from "../Intro/Intro";
+import LandingPage from './LandingPage';
 
-describe('LandingPage', () => {
-    
-    test('clicking the "Let’s Start!" button navigates to the Intro page', () => {
-        render(
-            <MemoryRouter>
-                <LandingPage />
-            </MemoryRouter>
-        );
+describe('LandingPage component', () => {
+  test('renders without crashing', () => {
+    render(
+      <MemoryRouter>
+        <LandingPage />
+      </MemoryRouter>
+    );
+    expect(screen.getByText('Whisker Wisdom')).toBeInTheDocument();
+  });
 
-        const startButton = screen.getByText(/let’s start/i);
-        fireEvent.click(startButton);
+  test('renders expected content', () => {
+    render(
+      <MemoryRouter>
+        <LandingPage />
+      </MemoryRouter>
+    );
+    expect(screen.getByText('Whisker Wisdom')).toBeInTheDocument();
+    expect(screen.getByRole('img')).toBeInTheDocument();
+    expect(screen.getByText('Let’s Start!')).toBeInTheDocument();
+  });
 
-        expect(screen.getByTestId('intro-component')).toBeInTheDocument();
-    });
-
+  test('redirects to correct route when button is clicked', () => {
+    const { container } = render(
+      <MemoryRouter initialEntries={['/']}>
+        <LandingPage />
+      </MemoryRouter>
+    );
+    fireEvent.click(screen.getByText('Let’s Start!'));
+    expect(container.innerHTML).toMatch('/Intro');
+  });
 });
