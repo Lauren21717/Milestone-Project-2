@@ -33,6 +33,7 @@ const Quiz = () => {
     if (!lock) {
       if (question.ans === ans) {
         option.target.classList.add("bg-success");
+        setScore(prev => prev + 1)
       } else {
         option.target.classList.add("bg-danger");
         option_arr[question.ans - 1].current.classList.add('bg-success')
