@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Fail.css'
 import catBg7 from '../../assets/images/cat7.png';
@@ -12,8 +13,12 @@ const Fail = () => {
                 <div>
                     <h3 className='fs-4 text-center'>Your marks is 5/10</h3>
                 </div>
-                <button className='rounded mx-auto d-block btn btn-lg px-5 fw-semibold text-white my-4'>Take the quiz again</button>
-                <button className='rounded mx-auto d-block btn btn-lg px-5 fw-semibold text-white'>Back to home page</button>
+                <Link to="/quiz" className="text-decoration-none">
+                    <button className='rounded mx-auto d-block btn btn-lg px-5 fw-semibold text-white my-4'>Take the quiz again</button>
+                </Link>
+                <Link to="/" className="text-decoration-none">
+                    <button className='rounded mx-auto d-block btn btn-lg px-5 fw-semibold text-white'>Back to home page</button>
+                </Link>
             </div>
         </div>
     )
