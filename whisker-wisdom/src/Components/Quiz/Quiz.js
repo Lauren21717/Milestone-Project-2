@@ -1,14 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Quiz.css'
+import './Quiz.css';
 import catBg4 from '../../assets/images/cat4.png';
-import { data } from '../../assets/JS/data'
+import { data } from '../../assets/JS/data';
+import { useNavigate } from 'react-router-dom';
 
 const Quiz = () => {
 
   const [questionIndex, setQuestionIndex] = useState(0);
   const [question, setQuestion] = useState(data[questionIndex]);
   const [lock, setLock] = useState(false);
+  const [score, setScore] = useState(0);
 
   const option1 = useRef(null);
   const option2 = useRef(null);
@@ -20,6 +22,8 @@ const Quiz = () => {
   useEffect(() => {
     setQuestion(data[questionIndex]);
   }, [questionIndex]);
+
+  const navigate = useNavigate();
 
   // Function to validate the user's answer in the quiz
   // Parameters:
@@ -37,9 +41,17 @@ const Quiz = () => {
     }
   };
 
+  // Function to handle navigation to the next question or to the pass/fail page
+  // If it's the last question and the score is sufficient, navigate to the pass page
+  // Otherwise, navigate to the fail page
   const nextQuestion = () => {
     if (lock) {
       if (questionIndex === data.length - 1) {
+        if (score >= 5) {
+          navigate('/pass', { state: { score } });
+        } else {
+          navigate('/fail', { state: { score } });
+        }
         return;
       }
       setQuestionIndex(prevIndex => prevIndex + 1);
