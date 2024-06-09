@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/Milestone-Project-2/static/css/main.5fbd9d2f.css",
+    "main.js": "/Milestone-Project-2/static/js/main.0cefc3d4.js",
+    "static/js/453.cf0969a9.chunk.js": "/Milestone-Project-2/static/js/453.cf0969a9.chunk.js",
+    "static/media/cat2.png": "/Milestone-Project-2/static/media/cat2.dfe1fe0afa3357b92fa7.png",
+    "static/media/cat3.png": "/Milestone-Project-2/static/media/cat3.27b216948ea325500e7c.png",
+    "static/media/cat7.png": "/Milestone-Project-2/static/media/cat7.be78b224db4a184cfcfe.png",
+    "static/media/cat6.png": "/Milestone-Project-2/static/media/cat6.83cf70d8a026fdfd6d39.png",
+    "static/media/cat4.png": "/Milestone-Project-2/static/media/cat4.1c2ad5f5e062735c4a22.png",
+    "index.html": "/Milestone-Project-2/index.html",
+    "main.5fbd9d2f.css.map": "/Milestone-Project-2/static/css/main.5fbd9d2f.css.map",
+    "main.0cefc3d4.js.map": "/Milestone-Project-2/static/js/main.0cefc3d4.js.map",
+    "453.cf0969a9.chunk.js.map": "/Milestone-Project-2/static/js/453.cf0969a9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5fbd9d2f.css",
+    "static/js/main.0cefc3d4.js"
+  ]
+}
