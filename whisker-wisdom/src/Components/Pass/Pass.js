@@ -15,7 +15,7 @@ const Pass = () => {
         <h1 className='display-5 text-center fw-bolder'>Good Job!</h1>
         <img className='rounded mx-auto d-block img-fluid' src={catBg6} alt='' />
         <div>
-          <h3 className='fs-4 text-center'>Your marks is {score}/10</h3>
+          <h2 className='fs-4 text-center'>Your marks is {score}/10</h2>
         </div>
         <Link to="/quiz" className="text-decoration-none">
           <button className='rounded mx-auto d-block btn btn-lg px-5 fw-semibold text-white my-4'>Take the quiz again</button>
