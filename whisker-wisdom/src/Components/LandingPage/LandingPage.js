@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './LandingPage.css'
+import './LandingPage.css';
 import catBg from '../../assets/images/cat2.png';
 
 const LandingPage = () => {
